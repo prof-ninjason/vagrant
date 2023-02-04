@@ -1,3 +1,2 @@
 # vagrant
-# vagrant
-# vagrant
+Vagrant projects.
