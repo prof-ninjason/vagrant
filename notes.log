@@ -31,10 +31,12 @@ Change the scope:
 
 https://app.vagrantup.com
 
-vagrant package --base pfSense --output ./pfSense.box ; sha512sum pfSense.box
+vagrant package --base pfSense --output ./pfSense.box ; sha512sum pfSense.box > SHA512SUM
+cd ~/vagrant/; ga
 vagrant box add --force my-box file:///home/jcrochon/vagrant/pfSense/pfSense.box
 
-vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box
+vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box > SHA512SUM
+cd ~/vagrant/; ga
 vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
 
 ========================================================================================================================================================================================
