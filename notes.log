@@ -1,0 +1,108 @@
+========================================================================================================================================================================================
+NOTES
+========================================================================================================================================================================================
+
+pfSense swap em0 & em1 thru Option 1
+em1 => WAN
+em0 => LAN
+
+========================================================================================================================================================================================
+
+VirtualBox - adding dhcp server and configuring virtual machine
+
+To add new DHCP server for specified local network, issue following command in the host's command line:
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.60 --upperip 192.168.10.69 --enable
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
+The created virtual server will be named intnet.
+
+In the virtual machine you have to configure network adapter to obtain IP address from the DHCP server. To do it just add following lines at the end of /etc/network/interface file:
+auto eth1
+iface eth1 inet dhcp
+
+To remove created above DHCP server (named intnet) execute following command:
+VBoxManage dhcpserver remove --netname intnet
+
+========================================================================================================================================================================================
+
+https://app.vagrantup.com
+
+vagrant package --base pfSense --output ./pfSense.box ; sha512sum pfSense.box
+vagrant box add --force my-box file:///home/jcrochon/vagrant/pfSense/pfSense.box
+
+vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box
+vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
+
+========================================================================================================================================================================================
+
+git add .
+git commit -a -m "updated"
+git branch -M main
+git remote add origin git@github.com:prof-ninjason/vagrant.git
+git push -u origin main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
