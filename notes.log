@@ -41,6 +41,10 @@ vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
 
 ========================================================================================================================================================================================
 
+git config --global user.name "prof-ninjason"
+git config --global user.email "jrochon@waubonsee.edu"
+git config --list
+
 git add .
 git commit -a -m "updated"
 git branch -M main
