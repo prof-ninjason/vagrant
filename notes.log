@@ -39,6 +39,10 @@ vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box > SHA
 cd ~/vagrant/; ga
 vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
 
+vagrant package --base pfSense --output ./kali.box ; sha512sum kali.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/kali/kali.box
+
 ========================================================================================================================================================================================
 
 git config --global user.name "prof-ninjason"
