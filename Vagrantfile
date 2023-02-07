@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
       vb.name = "pfSense"
   	  vb.memory = "2048"
       vb.cpus = "2"
+	  vb.gui = true
     end
   end
 
@@ -28,12 +29,12 @@ Vagrant.configure("2") do |config|
       vb.name = "Ubuntu"
   	  vb.memory = "2048"
       vb.cpus = "2"
+	  vb.gui = true
     end
   end
 
   config.vm.define "kali" do |kali|
-    # kali.vm.box = "prof-ninjason/kali"
-	kali.vm.box = "kalilinux/rolling"
+    kali.vm.box = "prof-ninjason/kali"
     kali.vm.hostname = "kali"
     
     kali.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
@@ -42,6 +43,7 @@ Vagrant.configure("2") do |config|
       vb.name = "Kali"
   	  vb.memory = "2048"
       vb.cpus = "2"
+	  vb.gui = true
     end
   end
 end
