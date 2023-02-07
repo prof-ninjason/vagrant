@@ -11,7 +11,7 @@ em0 => LAN
 VirtualBox - adding dhcp server and configuring virtual machine
 
 To add new DHCP server for specified local network, issue following command in the host's command line:
-& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --enable
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
 & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
 The created virtual server will be named intnet.
 
@@ -24,7 +24,7 @@ VBoxManage dhcpserver remove --netname intnet
 
 
 Change the scope:
-& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver modify --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --enable
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver modify --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
 & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
 
 ========================================================================================================================================================================================
