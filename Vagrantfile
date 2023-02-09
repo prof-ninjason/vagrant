@@ -33,6 +33,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "owasp" do |owasp|
+    # owasp.vm.box = "prof-ninjason/owasp"
+    owasp.vm.box = "owaspwebgoat/training"
+    owasp.vm.hostname = "owasp"
+    
+    owasp.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+  
+    owasp.vm.provider "virtualbox" do |vb|
+      vb.name = "owasp"
+  	  vb.memory = "2048"
+      vb.cpus = "2"
+	  vb.gui = true
+    end
+  end
+
   config.vm.define "kali" do |kali|
     kali.vm.box = "prof-ninjason/kali"
     kali.vm.hostname = "kali"
