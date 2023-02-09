@@ -34,8 +34,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "owasp" do |owasp|
-    # owasp.vm.box = "prof-ninjason/owasp"
-    owasp.vm.box = "owaspwebgoat/training"
+    owasp.vm.box = "prof-ninjason/owasp"
     owasp.vm.hostname = "owasp"
     
     owasp.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
