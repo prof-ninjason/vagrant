@@ -53,6 +53,7 @@ vagrant box update
 
 git config --global user.name "prof-ninjason"
 git config --global user.email "jrochon@waubonsee.edu"
+git config --global core.autocrlf true
 git config --list
 
 git add .
