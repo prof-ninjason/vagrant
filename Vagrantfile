@@ -1,6 +1,7 @@
 # Version: 1.0.0
 Vagrant.configure("2") do |config|
   config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.provision "none"
 
   config.vm.define "pfsense" do |pfsense|
     pfsense.vm.box = "prof-ninjason/pfsense"
