@@ -8,7 +8,8 @@ Vagrant.configure("2") do |config|
     pfsense.vm.box = "prof-ninjason/pfsense"
     pfsense.vm.hostname = "pfsense"
  
-    pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    # pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    pfsense.vm.network "private_network", ip: '192.168.10.60', virtualbox__intnet: true
  
     pfsense.vm.provider "virtualbox" do |vb|
       vb.name = "pfSense"
