@@ -14,9 +14,9 @@ Vagrant.configure("2") do |config|
   
     pfsense.vm.provider "virtualbox" do |vb|
       vb.name = "pfSense"
-  	  vb.memory = "2048"
+      vb.memory = "2048"
       vb.cpus = "2"
-	  vb.gui = true
+      vb.gui = true
     end
   end
 
@@ -28,9 +28,9 @@ Vagrant.configure("2") do |config|
   
     ubuntu.vm.provider "virtualbox" do |vb|
       vb.name = "Ubuntu"
-  	  vb.memory = "2048"
+      vb.memory = "2048"
       vb.cpus = "2"
-	  vb.gui = true
+      vb.gui = true
     end
   end
 
@@ -42,9 +42,9 @@ Vagrant.configure("2") do |config|
   
     owasp.vm.provider "virtualbox" do |vb|
       vb.name = "owasp"
-  	  vb.memory = "2048"
+      vb.memory = "2048"
       vb.cpus = "2"
-	  vb.gui = true
+      vb.gui = true
     end
   end
 
@@ -56,9 +56,9 @@ Vagrant.configure("2") do |config|
   
     kali.vm.provider "virtualbox" do |vb|
       vb.name = "Kali"
-  	  vb.memory = "2048"
+      vb.memory = "2048"
       vb.cpus = "2"
-	  vb.gui = true
+      vb.gui = true
     end
   end
 end
