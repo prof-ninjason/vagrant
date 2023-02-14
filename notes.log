@@ -47,6 +47,10 @@ vagrant package --base owasp --output ./owasp.box ; sha512sum owasp.box > SHA512
 cd ~/vagrant/; ga
 vagrant box add --force my-box file:///home/jcrochon/vagrant/owasp/owasp.box
 
+vagrant package --base 'CyberOps Security Onion' --output ./onion.box ; sha512sum onion.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/onion/onion.box
+
 vagrant box update
 
 ========================================================================================================================================================================================

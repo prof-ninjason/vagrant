@@ -60,4 +60,19 @@ Vagrant.configure("2") do |config|
       vb.gui = true
     end
   end
+
+  config.vm.define "onion" do |onion|
+    onion.vm.box = "prof-ninjason/onion"
+    onion.vm.hostname = "onion"
+ 
+    onion.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    onion.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    onion.vm.provider "virtualbox" do |vb|
+      vb.name = "onion"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
 end
