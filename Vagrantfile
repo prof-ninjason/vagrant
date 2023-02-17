@@ -33,7 +33,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "ub1404" do |ub1404|
+    # greenbone.vm.box = "prof-ninjason/greenbone"
+    ub1404.vm.box = "rapid7/metasploitable3-ub1404"
+    ub1404.vm.hostname = "ub1404"
 
+    ub1404.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    ub1404.vm.provider "virtualbox" do |vb|
+      vb.name = "ub1404"
+      vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+  
   config.vm.define "greenbone" do |greenbone|
     greenbone.vm.box = "prof-ninjason/greenbone"
     greenbone.vm.hostname = "greenbone"
