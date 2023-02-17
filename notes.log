@@ -70,6 +70,10 @@ git push -u origin main
 ========================================================================================================================================================================================
 
 
+<<<<<<< HEAD
+=======
+# API Token (Test): vagrant cloud auth login --token fGzPHP9EH81VZg.atlasv1.8h7JCG7JSHgyS4ELMyLUq6BGnijWKzmkPi2mEdbzS3CVzyKrcYrCH4wZdwgVdF62fugyou
+>>>>>>> 731cf3d70a97a3eabc13d9acb9d5258731653c75
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
 
 # Less than 5GB
