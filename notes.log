@@ -73,7 +73,7 @@ git push -u origin main
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
 
 # Less than 5GB
-vagrant cloud provider upload proj-ninjason/ubuntu virtualbox 1.1.1 ubuntu.box
+vagrant cloud provider upload prof-ninjason/ubuntu virtualbox 1.1.1 ubuntu.box
 
 
 
