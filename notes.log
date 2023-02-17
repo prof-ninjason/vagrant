@@ -51,6 +51,10 @@ vagrant package --base 'CyberOps Security Onion' --output ./onion.box ; sha512su
 cd ~/vagrant/; ga
 vagrant box add --force my-box file:///home/jcrochon/vagrant/onion/onion.box
 
+vagrant package --base 'CyberOps Security Onion' --output ./greenbone.box ; sha512sum greenbone.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/greenbone/greenbone.box
+
 vagrant box update
 
 ========================================================================================================================================================================================
@@ -73,9 +77,13 @@ git push -u origin main
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
 
 # Less than 5GB
-vagrant cloud provider upload prof-ninjason/ubuntu virtualbox 1.1.1 ubuntu.box
+vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone.box
 
 
+vagrant package --base Greenbone --output ./greenbone.box ; sha512sum greenbone.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/greenbone/greenbone.box
+vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone/greenbone.box
 
 
 

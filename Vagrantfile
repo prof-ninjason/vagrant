@@ -33,6 +33,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+
+  config.vm.define "greenbone" do |greenbone|
+    greenbone.vm.box = "prof-ninjason/greenbone"
+    greenbone.vm.hostname = "greenbone"
+
+    greenbone.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    greenbone.vm.provider "virtualbox" do |vb|
+      vb.name = "Greenbone"
+      vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
   config.vm.define "owasp" do |owasp|
     owasp.vm.box = "prof-ninjason/owasp"
     owasp.vm.hostname = "owasp"
