@@ -76,6 +76,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "rhel8" do |rhel8|
+    rhel8.vm.box = "prof-ninjason/rhel8"
+    rhel8.vm.box = "generic/rhel8"
+    rhel8.vm.hostname = "rhel8"
+
+    rhel8.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    rhel8.vm.provider "virtualbox" do |vb|
+      vb.name = "Rhel8"
+      vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
   config.vm.define "kali" do |kali|
     kali.vm.box = "prof-ninjason/kali"
     kali.vm.hostname = "kali"
