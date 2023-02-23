@@ -1,2 +1,0 @@
-# vagrant
-Vagrant projects.
