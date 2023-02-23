@@ -93,15 +93,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "win11" do |win11|
     win11.vm.box = "prof-ninjason/win11"
-    win11.vm.box = "gusztavvargadr/windows-11"
     win11.vm.hostname = "win11"
 
     win11.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
 
     win11.vm.provider "virtualbox" do |vb|
       vb.name = "Win11"
-      #vb.memory = "4096"
-      #vb.cpus = "2"
+      vb.memory = "4096"
+      vb.cpus = "2"
       vb.gui = true
     end
   end
