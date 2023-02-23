@@ -80,10 +80,10 @@ vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FI
 vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone.box
 
 
-vagrant package --base Rhel8 --output ./rhel8.box ; sha512sum rhel8.box > SHA512SUM
+vagrant package --base 'xxx' --output ./win10.box ; sha512sum win10.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/rhel8/rhel8.box
-vagrant cloud provider upload prof-ninjason/rhel8 virtualbox 1.0.0 rhel8/rhel8.box
+vagrant box add --force my-box file:///home/jcrochon/vagrant/win10/win10.box
+vagrant cloud provider upload prof-ninjason/win10 virtualbox 1.0.0 win10/win10.box
 
 
 

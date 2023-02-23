@@ -76,6 +76,21 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "win10" do |win10|
+    win10.vm.box = "prof-ninjason/win10"
+    win10.vm.box = "gusztavvargadr/windows-10"
+    win10.vm.hostname = "win10"
+
+    win10.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    win10.vm.provider "virtualbox" do |vb|
+      vb.name = "Win10"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
   config.vm.define "rhel8" do |rhel8|
     rhel8.vm.box = "prof-ninjason/rhel8"
     rhel8.vm.box = "generic/rhel8"
