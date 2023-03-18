@@ -78,7 +78,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "win10" do |win10|
     win10.vm.box = "prof-ninjason/win10"
-    win10.vm.box = "gusztavvargadr/windows-10"
     win10.vm.hostname = "win10"
 
     win10.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
