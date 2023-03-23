@@ -76,22 +76,14 @@ git push -u origin main
 
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
 
-# Less than 5GB
 vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone.box
 
 
-vagrant package --base 'Win22 Server (Core)' --output ./win22srvc.box ; sha512sum win22srvc.box > SHA512SUM
+vagrant package --base 'greenbone' --output ./greenbone.box ; sha512sum greenbone.box > SHA512SUM
 cat SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force win22srvc file:///home/jcrochon/vagrant/win22srvc/win22srvc.box
-vagrant cloud provider upload prof-ninjason/win22srvc virtualbox 1.0.0 win22srvc/win22srvc.box
-
-vagrant package --base 'Win22 Server' --output ./win22srv.box ; sha512sum win22srv.box > SHA512SUM ; cat SHA512SUM
-cd ~/vagrant/; ga
-vagrant box add --force win22srv file:///home/jcrochon/vagrant/win22srv/win22srv.box
-vagrant cloud provider upload prof-ninjason/win22srv virtualbox 1.0.0 win22srv/win22srv.box
-
-
+vagrant box add --force greenbone file:///home/jcrochon/vagrant/greenbone/greenbone.box
+vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone/greenbone.box
 
 
 

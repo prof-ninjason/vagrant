@@ -1,4 +1,4 @@
-# Version: 1.1.1 
+# Version: 1.2.3 
 Vagrant.configure("2") do |config|
   vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
 
@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "win10" do |win10|
-    win10.vm.box = "prof-ninjason/win10"
+    #win10.vm.box = "prof-ninjason/win10"
     win10.vm.hostname = "win10"
 
     win10.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
@@ -93,7 +93,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "win11" do |win11|
-    win11.vm.box = "prof-ninjason/win11"
+    #win11.vm.box = "prof-ninjason/win11"
     win11.vm.hostname = "win11"
 
     win11.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
@@ -159,8 +159,8 @@ Vagrant.configure("2") do |config|
 
     winsrv2022core.vm.provider "virtualbox" do |vb|
       vb.name = "Win22 Server (Core)"
-      vb.memory = "4096"
-      vb.cpus = "2"
+      vb.memory = "8192"
+      vb.cpus = "4"
       vb.gui = true
     end
   end
@@ -174,8 +174,8 @@ Vagrant.configure("2") do |config|
 
     winsrv2022.vm.provider "virtualbox" do |vb|
       vb.name = "Win22 Server"
-      vb.memory = "4096"
-      vb.cpus = "2"
+      vb.memory = "8192"
+      vb.cpus = "4"
       vb.gui = true
     end
   end
