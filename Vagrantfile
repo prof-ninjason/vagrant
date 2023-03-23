@@ -1,9 +1,11 @@
 # Version: 1.1.1 
 Vagrant.configure("2") do |config|
+  vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
+
   config.vm.synced_folder '.', '/vagrant', disabled: true
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
-
+  
   config.vm.define "pfsense" do |pfsense|
     pfsense.vm.box = "prof-ninjason/pfsense"
     pfsense.vm.hostname = "pfsense"
@@ -146,5 +148,49 @@ Vagrant.configure("2") do |config|
       vb.cpus = "2"
       vb.gui = true
     end
+  end
+
+  config.vm.define "winsrv2022core" do |winsrv2022core|
+    winsrv2022core.vm.box = "gusztavvargadr/windows-server-core"
+    winsrv2022core.vm.hostname = "winsrv2022core"
+ 
+    winsrv2022core.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    winsrv2022core.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    winsrv2022core.vm.provider "virtualbox" do |vb|
+      vb.name = "Win22 Server (Core)"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
+  config.vm.define "winsrv2022" do |winsrv2022|
+    winsrv2022.vm.box = "gusztavvargadr/windows-server-2022-standard-nocm"
+    winsrv2022.vm.hostname = "winsrv2022"
+ 
+    winsrv2022.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    winsrv2022.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    winsrv2022.vm.provider "virtualbox" do |vb|
+      vb.name = "Win22 Server"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
+  if vm_name.start_with?('w')
+    config.vm.provision 'shell', inline: <<-EOF
+      cmd /c ver
+      Get-ComputerInfo
+    EOF
+  else
+    config.vm.provision 'shell', inline: <<-EOF
+      uname -a
+      lsb_release -a
+      lshw
+      apt list --installed
+    EOF
   end
 end
