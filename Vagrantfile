@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
     pfsense.vm.box = "prof-ninjason/pfsense"
     pfsense.vm.hostname = "pfsense"
  
-    # pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
-    pfsense.vm.network "private_network", ip: '192.168.10.60', virtualbox__intnet: true
+    pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    # pfsense.vm.network "private_network", ip: '192.168.10.60', virtualbox__intnet: true
  
     pfsense.vm.provider "virtualbox" do |vb|
       vb.name = "pfSense"
@@ -36,7 +36,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ub1404" do |ub1404|
-    # greenbone.vm.box = "prof-ninjason/greenbone"
     ub1404.vm.box = "rapid7/metasploitable3-ub1404"
     ub1404.vm.hostname = "ub1404"
 
@@ -79,7 +78,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "win10" do |win10|
-    #win10.vm.box = "prof-ninjason/win10"
+    win10.vm.box = "prof-ninjason/win10"
     win10.vm.hostname = "win10"
 
     win10.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
@@ -93,7 +92,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "win11" do |win11|
-    #win11.vm.box = "prof-ninjason/win11"
+    win11.vm.box = "prof-ninjason/win11"
     win11.vm.hostname = "win11"
 
     win11.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
