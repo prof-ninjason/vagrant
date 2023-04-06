@@ -28,6 +28,12 @@ Change the scope:
 & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
 
 ========================================================================================================================================================================================
+ssh-keygen -t ed25519 -C "jrochon@waubonsee.edu"
+
+.ssh directory: 	700 (drwx------)
+public key (.pub file): 644 (-rw-r--r--)
+private key (id_rsa): 	600 (-rw-------)
+home directory: 	755 (drwxr-xr-x)
 
 https://app.vagrantup.com
 
