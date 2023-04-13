@@ -92,4 +92,8 @@ vagrant box add --force greenbone file:///home/jcrochon/vagrant/greenbone/greenb
 vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone/greenbone.box
 
 
+# Launch a list of VMs in the background
+jcrochon@PC214-027885:~/vagrant$ for j in `cat`; do vagrant up $j & done
+kali owasp pfsense
+
 
