@@ -2,7 +2,7 @@
 Vagrant.configure("2") do |config|
   vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
 
-  config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.synced_folder '.', '/share', disabled: false
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
   
