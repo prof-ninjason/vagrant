@@ -35,6 +35,34 @@ Vagrant.configure("2") do |config|
     end
   end
   
+  config.vm.define "alpine" do |alpine|
+    alpine.vm.box = "generic/alpine39"
+    alpine.vm.hostname = "alpine"
+
+    alpine.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    alpine.vm.provider "virtualbox" do |vb|
+      vb.name = "Alpine"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
+  config.vm.define "centos" do |centos|
+    centos.vm.box = "generic/centos7"
+    centos.vm.hostname = "centos"
+
+    centos.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    centos.vm.provider "virtualbox" do |vb|
+      vb.name = "Centos"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+  
   config.vm.define "parrot" do |parrot|
     parrot.vm.box = "Purple/ParrotOS"
     parrot.vm.hostname = "parrot"
