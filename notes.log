@@ -79,6 +79,12 @@ vagrant box update
 
 ========================================================================================================================================================================================
 
+# if using older "master", rename to "main"
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+
 git config --global user.name "prof-ninjason"
 git config --global user.email "jrochon@waubonsee.edu"
 git config --global core.autocrlf true
