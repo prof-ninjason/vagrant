@@ -1,6 +1,20 @@
 ========================================================================================================================================================================================
 NOTES
 ========================================================================================================================================================================================
+[.bashrc , .bash_aliases]
+
+alias ga='git add . ; git commit -m "updated" ; git push -u origin main'
+
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+
+~/bin/update
+wsl.exe --update
+
+vagrant plugin update
+#vagrant box update
+
+========================================================================================================================================================================================
 
 pfSense swap em0 & em1 thru Option 1
 em1 => WAN
@@ -78,6 +92,12 @@ git push -u origin main
 
 
 ========================================================================================================================================================================================
+
+# Install Ruby Gems
+sudo gem install ffi -- --enable-system-libffi.
+
+# Install virtualbox_WSL2 plugin
+sudo vagrant plugin install virtualbox_WSL2 libvirt vagrant-libvirt vagrant-vbguest vagrant-box-updater  vagrant-remove-old-box-versions vagrant-clean vagrant-winrm-syncedfolders vagrant-sshfs vagrant-mutate vagrant-bindfs
 
 
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
