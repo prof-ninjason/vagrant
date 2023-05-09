@@ -7,12 +7,47 @@ alias ga='git add . ; git commit -m "updated" ; git push -u origin main'
 
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+PATH=/usr/bin:/sbin:/usr/sbin:$PATH dockerd-rootless.sh  --iptables=false
+export DOCKER_HOST=unix:///mnt/wslg/runtime-dir/docker.sock
+export PATH=/usr/bin:$PATH
 
 ~/bin/update
 wsl.exe --update
-
+sudo apt upgrade wsl ruby-dev
 vagrant plugin update
 #vagrant box update
+
+========================================================================================================================================================================================
+[ I N S T A L L   S C R I P T S ]
+
+[DHCP INTERNAL NETWORK]
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
+
+[VAGRANT]
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt update && sudo apt install vagrant && sudo apt autoremove
+
+vagrant plugin install vagrant-virtualbox
+
+[test]
+cd /home/jcrochon/vagrant/ && vagrant up pfsense
+
+
+[DOCKER]
+sudo apt -y purge docker docker-engine docker.io containerd runc && sudo apt -y update && sudo apt -y install ca-certificates curl gnupg
+
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+
+sudo usermod -a -G docker $USER
+
+
+
+[test]
+sudo -E docker run -d -p 8000:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=ChangeM3!" --name splunk splunk/splunk:latest
+
+http://localhost:8000
 
 ========================================================================================================================================================================================
 
@@ -44,10 +79,10 @@ Change the scope:
 ========================================================================================================================================================================================
 ssh-keygen -t ed25519 -C "jrochon@waubonsee.edu"
 
-.ssh directory: 	700 (drwx------)
-public key (.pub file): 644 (-rw-r--r--)
+.ssh directory: 		700 (drwx------)
+public key (.pub file):	644 (-rw-r--r--)
 private key (id_rsa): 	600 (-rw-------)
-home directory: 	755 (drwxr-xr-x)
+home directory: 		755 (drwxr-xr-x)
 
 https://app.vagrantup.com
 
@@ -100,7 +135,7 @@ git push -u origin main
 ========================================================================================================================================================================================
 
 # Install Ruby Gems
-sudo gem install ffi -- --enable-system-libffi.
+sudo gem install ffi -- --enable-system-libffi
 
 # Install virtualbox_WSL2 plugin
 sudo vagrant plugin install virtualbox_WSL2 libvirt vagrant-libvirt vagrant-vbguest vagrant-box-updater  vagrant-remove-old-box-versions vagrant-clean vagrant-winrm-syncedfolders vagrant-sshfs vagrant-mutate vagrant-bindfs

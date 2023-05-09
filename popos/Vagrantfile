@@ -1,0 +1,4 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "xtangle/pop_os-20.04"
+  config.vm.box_version = "202012.25.0"
+end
