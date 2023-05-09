@@ -36,7 +36,7 @@ cd /home/jcrochon/vagrant/ && vagrant up pfsense
 
 
 [DOCKER]
-sudo apt -y purge docker docker-engine docker.io containerd runc && sudo apt -y update && sudo apt -y install ca-certificates curl gnupg
+sudo apt -y purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras && sudo apt -y update && sudo apt -y install ca-certificates curl gnupg
 
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
 
