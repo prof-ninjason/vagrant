@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.ssh.password = 'vagrant'
 
   config.vm.define "opnsense" do |opnsense|
-    opnsense.vm.box = "puzzle/opnsense"
+    opnsense.vm.box = "axenedu/opnsense-20.1"
     opnsense.vm.hostname = "opnsense"
  
     opnsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
