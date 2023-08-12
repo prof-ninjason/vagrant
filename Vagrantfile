@@ -5,6 +5,21 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder '.', '/share', disabled: true
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
+
+  config.vm.define "opnsense" do |opnsense|
+    opnsense.vm.box = "puzzle/opnsense"
+    opnsense.vm.hostname = "opnsense"
+ 
+    opnsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    # opnsense.vm.network "private_network", ip: '192.168.10.60', virtualbox__intnet: true
+ 
+    opnsense.vm.provider "virtualbox" do |vb|
+      vb.name = "opnSense"
+      vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
   
   config.vm.define "pfsense" do |pfsense|
     pfsense.vm.box = "prof-ninjason/pfsense"
