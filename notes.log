@@ -146,11 +146,13 @@ vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FI
 vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone.box
 
 
-vagrant package --base 'Centos' --output ./splunk.box ; sha512sum splunk.box > SHA512SUM
-cat SHA512SUM
-cd ~/vagrant/; ga
-vagrant box add --force splunk file:///home/jcrochon/vagrant/splunk/splunk.box
-vagrant cloud provider upload prof-ninjason/splunk virtualbox 1.0.0 splunk/splunk.box
+cd opnsense/
+vagrant package --base 'opnSense' --output ./opnsense.box
+sha512sum opnsense.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force opnsense file:///home/jcrochon/vagrant/opnsense/opnsense.box
+vagrant cloud provider upload prof-ninjason/opnsense virtualbox 1.0.0 opnsense/opnsense.box
 
 
 # Launch a list of VMs in the background
