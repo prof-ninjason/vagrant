@@ -161,3 +161,14 @@ kali owasp pfsense
 
 ==============================================
 
+
+
+QWEqwe123
+
+cd ~/vagrant/pfSense/
+vagrant package --base 'pfSense' --output ./pfSense.box
+sha512sum pfSense.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force pfSense file:///home/jcrochon/vagrant/pfSense/pfSense.box
+vagrant cloud provider upload prof-ninjason/pfSense virtualbox 2.7.0 pfSense/pfSense.box
