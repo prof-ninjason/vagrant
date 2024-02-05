@@ -163,7 +163,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "onion" do |onion|
-    onion.vm.box = "prof-ninjason/onion"
+    # onion.vm.box = "prof-ninjason/onion"
+    onion.vm.box = "dlee35/securityonion"
     onion.vm.hostname = "onion"
  
     onion.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
