@@ -1,4 +1,4 @@
-# Version: 1.2.3 
+# Version: 1.2.4 
 Vagrant.configure("2") do |config|
   vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
 
@@ -92,20 +92,6 @@ Vagrant.configure("2") do |config|
     end
   end
   
-  config.vm.define "parrot" do |parrot|
-    parrot.vm.box = "Purple/ParrotOS"
-    parrot.vm.hostname = "parrot"
-
-    parrot.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
-
-    parrot.vm.provider "virtualbox" do |vb|
-      vb.name = "Parrot"
-      vb.memory = "4096"
-      vb.cpus = "2"
-      vb.gui = true
-    end
-  end
-
   config.vm.define "ub1404" do |ub1404|
     ub1404.vm.box = "rapid7/metasploitable3-ub1404"
     ub1404.vm.hostname = "ub1404"
@@ -157,6 +143,20 @@ Vagrant.configure("2") do |config|
     kali.vm.provider "virtualbox" do |vb|
       vb.name = "Kali"
       vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
+  config.vm.define "parrot" do |parrot|
+    parrot.vm.box = "prof-ninjason/kali"
+    parrot.vm.hostname = "parrot"
+
+    parrot.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    parrot.vm.provider "virtualbox" do |vb|
+      vb.name = "Parrot"
+      vb.memory = "4096"
       vb.cpus = "2"
       vb.gui = true
     end
