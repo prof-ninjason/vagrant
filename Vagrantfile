@@ -136,7 +136,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "kali" do |kali|
     kali.vm.box = "prof-ninjason/kali"
-    kali.vm.hostname = "kali"
+    kali.vm.box = "kalilinux/rolling"
+	kali.vm.hostname = "kali"
  
     kali.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
 

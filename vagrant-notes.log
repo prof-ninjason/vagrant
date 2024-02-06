@@ -162,9 +162,18 @@ kali owasp pfsense
 ==============================================
 
 cd ~/vagrant/parrot/
-vagrant package --base 'parrot' --output ./parrot.box
+vagrant package --base 'Parrot Security 6.0' --output ./parrot.box
 sha512sum parrot.box | tee SHA512SUM
 cd ~/vagrant/
 ga
 vagrant box add --force parrot file:///home/jcrochon/vagrant/parrot/parrot.box
 vagrant cloud provider upload prof-ninjason/parrot virtualbox 1.0.0 parrot/parrot.box
+
+
+cd ~/vagrant/kali/
+vagrant package --base 'kali' --output ./kali.box
+sha512sum kali.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
+vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
