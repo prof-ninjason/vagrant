@@ -177,3 +177,4 @@ cd ~/vagrant/
 ga
 vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
 vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
+
