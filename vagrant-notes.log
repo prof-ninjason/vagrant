@@ -179,4 +179,4 @@ vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
 vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
 
 # Vagrant 2.4.0 and newer
-vagrant cloud publish --architecture amd64 --no-direct-upload bento/ubuntu-22.04 1.0.0 virtualbox builds/ubuntu-22.04-x86_64.virtualbox.box --force --release true
+vagrant cloud publish --architecture amd64 --no-direct-upload prof-ninjason/parrot 1.0.0 virtualbox parrot/parrot.box --force --release true
