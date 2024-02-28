@@ -179,4 +179,5 @@ vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
 vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
 
 # Vagrant 2.4.0 and newer
-vagrant cloud publish --architecture amd64 --no-direct-upload --no-private --force --release prof-ninjason/parrot 1.0.0 virtualbox parrot/parrot.box
+vagrant cloud publish --architecture amd64 --no-direct-upload --no-private --force --release --description "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/parrot 1.0.0 virtualbox parrot/parrot.box
+
