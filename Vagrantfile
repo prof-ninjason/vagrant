@@ -193,6 +193,22 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "android" do |android|
+    # android.vm.box = "prof-ninjason/android"
+    android.vm.box = "motiv/android"
+    android.vm.hostname = "android"
+ 
+    android.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+    android.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    android.vm.provider "virtualbox" do |vb|
+      vb.name = "Android"
+      vb.memory = "12288"
+      vb.cpus = "4"
+      vb.gui = true
+    end
+  end
+
   if vm_name.start_with?('w')
     config.vm.provision 'shell', inline: <<-EOF
       cmd /c ver
