@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   end
   
   config.vm.define "pfsense" do |pfsense|
-    pfsense.vm.box = "prof-ninjason/pfsense"
+    pfsense.vm.box = "prof-ninjason/pfSense"
     pfsense.vm.hostname = "pfsense"
  
     pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
