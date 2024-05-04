@@ -181,3 +181,28 @@ vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
 # Vagrant 2.4.0 and newer
 vagrant cloud publish -a amd64 -c 7ee4fdb3b80988c754f888b6b9f1c05feaae3811ae79ee095eeaa5ea70b480ed6b49cba8334c36311053546b81f13a629e3f8af5831f3137f2607e7fd13241ec -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine 1.0.0 virtualbox alpine/alpine.box
 
+==============================================
+
+Migrating to Hashicorp Cloud Platform (HCP)
+
+https://developer.hashicorp.com/vagrant/vagrant-cloud/hcp-vagrant/post-migration-guide
+https://developer.hashicorp.com/hcp/docs/cli/install
+https://developer.hashicorp.com/hcp/docs/cli
+
+sudo apt-get update && sudo apt-get install wget gpg coreutils
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt-get update && sudo apt-get install hcp
+
+hcp -autocomplete-install
+
+hcp profile init
+
+hcp auth login --client-id=CLIENT_ID --client-secret=CLIENT_SECRET
+
+hcp auth print-access-token
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;$(hcp auth print-access-token)"
