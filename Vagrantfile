@@ -1,4 +1,4 @@
-# Version: 1.2.4 
+# Version: 1.3.5 
 Vagrant.configure("2") do |config|
   vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
 
