@@ -138,7 +138,7 @@ git push -u origin main
 sudo gem install ffi -- --enable-system-libffi
 
 # Install virtualbox_WSL2 plugin
-sudo vagrant plugin install virtualbox_WSL2 libvirt vagrant-libvirt vagrant-vbguest vagrant-box-updater  vagrant-remove-old-box-versions vagrant-clean vagrant-winrm-syncedfolders vagrant-sshfs vagrant-mutate vagrant-bindfs
+sudo vagrant plugin install virtualbox_WSL2 vagrant-vbguest vagrant-box-updater  vagrant-remove-old-box-versions vagrant-clean vagrant-winrm-syncedfolders vagrant-sshfs vagrant-mutate vagrant-bindfs
 
 
 vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
