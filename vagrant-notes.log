@@ -206,3 +206,14 @@ hcp auth login --client-id=CLIENT_ID --client-secret=CLIENT_SECRET
 hcp auth print-access-token
 
 export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;$(hcp auth print-access-token)"
+
+-------------------------------------------------------------
+
+MIGHT NOT NEED TO USE HCP TO MANAGE VAGRANT BOXES
+
+vagrant package --base 'Kali Purple' --output ./kali-purple.box
+sha512sum kali-purple.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force kalipurple file:///home/jcrochon/vagrant/kali-purple/kali-purple.box
+vagrant cloud provider upload prof-ninjason/kalipurple virtualbox 1.0.0 kali-purple/kali-purple.box

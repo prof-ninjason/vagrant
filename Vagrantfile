@@ -1,10 +1,5 @@
-# Version: 1.3.5 
+# Version: 2.0.1 
 Vagrant.configure("2") do |config|
-  vm_name = ENV['VAGRANT_VM_NAME'] || 'default'
-
-  config.vm.synced_folder '.', '/share', disabled: true
-  config.ssh.username = 'vagrant'
-  config.ssh.password = 'vagrant'
 
   config.vm.define "opnsense" do |opnsense|
     opnsense.vm.box = "axenedu/opnsense-20.1"
@@ -50,20 +45,6 @@ Vagrant.configure("2") do |config|
     end
   end
   
-  config.vm.define "alpine" do |alpine|
-    alpine.vm.box = "generic/alpine39"
-    alpine.vm.hostname = "alpine"
-
-    alpine.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
-
-    alpine.vm.provider "virtualbox" do |vb|
-      vb.name = "Alpine"
-      vb.memory = "4096"
-      vb.cpus = "2"
-      vb.gui = true
-    end
-  end
-
   config.vm.define "centos" do |centos|
     centos.vm.box = "generic/centos7"
     centos.vm.hostname = "centos"
@@ -149,8 +130,23 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "kalipurple" do |kalipurple|
+    kalipurple.vm.box = "prof-ninjason/kalipurple"
+    kalipurple.vm.box = "./kalipurple.box"
+	kalipurple.vm.hostname = "kalipurple"
+ 
+    kalipurple.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    kalipurple.vm.provider "virtualbox" do |vb|
+      vb.name = "kalipurple"
+      vb.memory = "2048"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end
+
   config.vm.define "parrot" do |parrot|
-    parrot.vm.box = "prof-ninjason/kali"
+    parrot.vm.box = "prof-ninjason/parrot"
     parrot.vm.hostname = "parrot"
 
     parrot.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
@@ -207,19 +203,5 @@ Vagrant.configure("2") do |config|
       vb.cpus = "4"
       vb.gui = true
     end
-  end
-
-  if vm_name.start_with?('w')
-    config.vm.provision 'shell', inline: <<-EOF
-      cmd /c ver
-      Get-ComputerInfo
-    EOF
-  else
-    config.vm.provision 'shell', inline: <<-EOF
-      uname -a
-      lsb_release -a
-      lshw
-      apt list --installed
-    EOF
   end
 end

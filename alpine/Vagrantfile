@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "pfsense" do |pfsense|
+    pfsense.vm.box = "prof-ninjason/pfSense"
+    pfsense.vm.hostname = "pfsense"
+
+    pfsense.ssh.private_key_path = "~/.ssh/id_rsa"
+    pfsense.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/authorized_keys"
+
+    pfsense.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+    pfsense.vm.provider "virtualbox" do |vb|
+      vb.name = "pfsense"
+      vb.memory = "4096"
+      vb.cpus = "2"
+      vb.gui = true
+    end
+  end  
+end
