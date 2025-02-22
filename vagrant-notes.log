@@ -179,7 +179,7 @@ vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
 vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
 
 # Vagrant 2.4.0 and newer
-vagrant cloud publish -a amd64 -c 7ee4fdb3b80988c754f888b6b9f1c05feaae3811ae79ee095eeaa5ea70b480ed6b49cba8334c36311053546b81f13a629e3f8af5831f3137f2607e7fd13241ec -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine 1.0.0 virtualbox alpine/alpine.box
+vagrant cloud publish -a amd64 -c 023fb3d0b7357782f7296d386ab8fe798ebc24a057e73f56dde96518bef9eef317ebecd4994dca16717bb0784ae92a8c13826a68a3fd0d857ea37e8cf3260745  -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine virtualbox 1.0.0 alpine/alpine.box
 
 ==============================================
 
@@ -217,3 +217,66 @@ cd ~/vagrant/
 ga
 vagrant box add --force kalipurple file:///home/jcrochon/vagrant/kali-purple/kali-purple.box
 vagrant cloud provider upload prof-ninjason/kalipurple virtualbox 1.0.0 kali-purple/kali-purple.box
+
+
+
+
+curl 'https://vagrantcloud.com/api/v2/box/USERNAME/BOX_NAME/version/VERSION/provider/PROVIDER_NAME/ARCHITECTURE_NAME/upload?access_token=ACCESS_TOKEN'
+
+
+curl 'https://vagrantcloud.com/api/v2/box/prof-ninjason/kali-purple/version/1.0.0/provider/virtualbox/amd64/upload?access_token=YJZ4vVix8fRJ4Q.atlasv1.cnjwjNdvxa109PbkkqFG1fCnBhczkjyrUnsRaWWWmZKr49vzrqRPEML41vFRSylFIyA'
+
+
+
+====================================================================================================================================
+
+
+vagrant package --base Kali-Purple --output kali-purple.box
+hcp vagrant box upload Kali-Purple kali-purple.box --version "1.0.0" --provider virtualbox --arch amd64
+
+[X] [X] [X] ONLY THIS WORKS FOR UPLOADING TO HCP [X] [X] [X]
+vagrant cloud publish -a amd64 -c 023fb3d0b7357782f7296d386ab8fe798ebc24a057e73f56dde96518bef9eef317ebecd4994dca16717bb0784ae92a8c13826a68a3fd0d857ea37e8cf3260745  -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine virtualbox 1.0.0 alpine/alpine.box
+
+
+hcp auth login --client-id=CLIENT_ID --client-secret=CLIENT_SECRET
+
+hcp auth print-access-token
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;<HCP_TOKEN>"
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;$(hcp auth print-access-token)"
+
+export VAGRANT_CLOUD_TOKEN=";$(hcp auth print-access-token)"
+
+hcp auth login --client-id=cg1gsECaJ87rcLN6celcBgJAFC25T4FP --client-secret=e38YwrGQoqOKngBrzTuHMm5u1HCPKc1Tzq_m_ZEAs6PTj0yvDTlUpX1RL00OmGjF
+
+
+====================================================================================================================================
+NEW UPDATED INSTRUCTIONS
+
+vagrant cloud publish --box-version "1.0.0" --provider virtualbox --release prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+VAGRANT_LOG=info vagrant package --base "Kali Purple" --output vagrant/kali-purple/kali-purple.box
+
+vagrant cloud publish -C sha512 -c <HASH> prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+====================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,18 +1,37 @@
 Vagrant.configure("2") do |config|
-  config.vm.define "kalipurple" do |kalipurple|
-    kalipurple.vm.box = "prof-ninjason/kalipurple"
-    kalipurple.vm.hostname = "kalipurple"
+  # Use the official Kali Linux box
+  config.vm.box = "kalilinux/rolling"
 
-    kalipurple.ssh.private_key_path = "~/.ssh/id_rsa"
-    kalipurple.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/authorized_keys"
+  # Configure bridged networking
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"  # Replace with your host's network interface
 
-    kalipurple.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+  # Share a folder for scan results
+  config.vm.synced_folder "./scan_results", "/home/kali/scan_results"
 
-    kalipurple.vm.provider "virtualbox" do |vb|
-      vb.name = "Kali Purple"
-      vb.memory = "8192"
-      vb.cpus = "4"
-      vb.gui = true
-    end
-  end  
+  # Provision the VM
+  config.vm.provision "shell", inline: <<-SHELL
+    # Update and install required packages
+    apt-get update
+    apt-get install -y kali-desktop-xfce tightvncserver nmap
+
+    # Set up VNC server
+    mkdir -p /home/kali/.vnc
+    echo 'password' | vncpasswd -f > /home/kali/.vnc/passwd
+    chmod 600 /home/kali/.vnc/passwd
+
+    # Start VNC server
+    vncserver :0 -geometry 1280x800 -depth 24
+
+    # Create a scan script
+    echo '#!/bin/bash' > /home/kali/scan.sh
+    echo 'nmap -sP 192.168.1.0/24 -o /home/kali/scan_results/scan_results.txt' >> /home/kali/scan.sh
+    chmod +x /home/kali/scan.sh
+  SHELL
+
+  # VirtualBox provider settings
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true  # Enable GUI for VirtualBox
+    vb.memory = "2048"  # Allocate 2GB RAM
+    vb.cpus = 2  # Allocate 2 CPUs
+  end
 end
