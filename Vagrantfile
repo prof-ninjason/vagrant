@@ -133,17 +133,16 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "kalipurple" do |kalipurple|
-    kalipurple.vm.box = "prof-ninjason/kalipurple"
-    kalipurple.vm.box = "./kalipurple.box"
-	kalipurple.vm.hostname = "kalipurple"
+  config.vm.define "kali-purple" do |kalipurple|
+    kalipurple.vm.box = "prof-ninjason/kali-purple"
+	kalipurple.vm.hostname = "kali-purple"
  
     kalipurple.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
 
     kalipurple.vm.provider "virtualbox" do |vb|
-      vb.name = "kalipurple"
-      vb.memory = "2048"
-      vb.cpus = "2"
+      vb.name = "Kali Purple"
+      vb.memory = "8192"
+      vb.cpus = "8"
       vb.gui = true
     end
   end
