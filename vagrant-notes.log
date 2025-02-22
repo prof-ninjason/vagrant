@@ -1,3 +1,8 @@
+hcp auth login --client-id=....  --client-secret=.... 
+export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
+
+BOX=ubuntu2310-checksum ; vagrant cloud publish -C sha256 -c "$(sha256sum $BOX.box | awk { print })" --release -a amd64 --direct-upload --debug "eldipa-seclab/$BOX" 1 virtualbox $BOX.box
+
 ========================================================================================================================================================================================
 NOTES
 ========================================================================================================================================================================================
@@ -251,14 +256,42 @@ VAGRANT_LOG=info vagrant package --base "Kali Purple" --output vagrant/kali-purp
 vagrant cloud publish -C sha512 -c <HASH> prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
 ====================================================================================================================================
 
+vagrant cloud publish --box-version "1.0.0" --provider virtualbox --release prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+VAGRANT_LOG=info vagrant package --base "Kali Purple" --output vagrant/kali-purple/kali-purple.box
+
+vagrant cloud publish -C sha512 -c prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+
+
+Your key was successfully generated.
+
+Client ID
+
+
+77IfcyNeMgqF2md3Fo2HVLPjxYcZD55D
+
+
+Be sure to copy the client secret. You will not be able to retrieve it later.
+Client secret
+
+
+hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV74
+
+
+
+vagrant cloud publish -c 8e2cf09d7b53c74f8b81df1c6f70bab6de477a443c761053725c6fd5effb4b738a169dec0755a578811dbaace78b0b70533ff5664b10f4f04aa3f0d16c86c565 -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/kali-purple virtualbox 1.0.0 kali-purple/kali-purple.box
 
 
 
 
 
 
-
-
+unset VAGRANT_CLOUD_TOKEN
+export HCP_CLIENT_ID="77IfcyNeMgqF2md3Fo2HVLPjxYcZD55D"
+export HCP_CLIENT_SECRET="hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV74"
 
 
 
