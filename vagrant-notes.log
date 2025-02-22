@@ -218,18 +218,7 @@ ga
 vagrant box add --force kalipurple file:///home/jcrochon/vagrant/kali-purple/kali-purple.box
 vagrant cloud provider upload prof-ninjason/kalipurple virtualbox 1.0.0 kali-purple/kali-purple.box
 
-
-
-
-curl 'https://vagrantcloud.com/api/v2/box/USERNAME/BOX_NAME/version/VERSION/provider/PROVIDER_NAME/ARCHITECTURE_NAME/upload?access_token=ACCESS_TOKEN'
-
-
-curl 'https://vagrantcloud.com/api/v2/box/prof-ninjason/kali-purple/version/1.0.0/provider/virtualbox/amd64/upload?access_token=YJZ4vVix8fRJ4Q.atlasv1.cnjwjNdvxa109PbkkqFG1fCnBhczkjyrUnsRaWWWmZKr49vzrqRPEML41vFRSylFIyA'
-
-
-
 ====================================================================================================================================
-
 
 vagrant package --base Kali-Purple --output kali-purple.box
 hcp vagrant box upload Kali-Purple kali-purple.box --version "1.0.0" --provider virtualbox --arch amd64
