@@ -1,7 +1,14 @@
 hcp auth login --client-id=....  --client-secret=.... 
 export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
 
-BOX=kali-purple ; vagrant cloud publish -C sha512 -c "$(sha512sum $BOX.box | awk '{print $1}')" --release -a amd64 --direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX.box
+VBoxManage.exe list vms
+
+BOX=kali-purple
+vagrant package --base "Kali Purple" --output $BOX/$BOX.box
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/$BOX/$BOX.box
+
+vagrant cloud publish -C sha512 -c "$(sha512sum $BOX.box | awk '{print $1}')" --release -a amd64 --direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX.box
 
 ========================================================================================================================================================================================
 NOTES
