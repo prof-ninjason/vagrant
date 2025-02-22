@@ -271,14 +271,14 @@ Your key was successfully generated.
 Client ID
 
 
-77IfcyNeMgqF2md3Fo2HVLPjxYcZD55D
+D77IfcyNeMgqF2md3Fo2HVLPjxYcZD55
 
 
 Be sure to copy the client secret. You will not be able to retrieve it later.
 Client secret
 
 
-hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV74
+4hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV7
 
 
 
@@ -290,8 +290,8 @@ vagrant cloud publish -c 8e2cf09d7b53c74f8b81df1c6f70bab6de477a443c761053725c6fd
 
 
 unset VAGRANT_CLOUD_TOKEN
-export HCP_CLIENT_ID="77IfcyNeMgqF2md3Fo2HVLPjxYcZD55D"
-export HCP_CLIENT_SECRET="hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV74"
+export HCP_CLIENT_ID="D77IfcyNeMgqF2md3Fo2HVLPjxYcZD55"
+export HCP_CLIENT_SECRET="4hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV7"
 
 
 
