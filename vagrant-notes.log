@@ -1,7 +1,7 @@
 hcp auth login --client-id=....  --client-secret=.... 
 export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
 
-BOX=ubuntu2310-checksum ; vagrant cloud publish -C sha256 -c "$(sha256sum $BOX.box | awk {print})" --release -a amd64 --direct-upload --debug "eldipa-seclab/$BOX" 1 virtualbox $BOX.box
+BOX=kali-purple ; vagrant cloud publish -C sha512 -c "$(sha512sum $BOX.box | awk '{print $1}')" --release -a amd64 --direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX.box
 
 ========================================================================================================================================================================================
 NOTES
