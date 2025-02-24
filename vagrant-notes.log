@@ -10,7 +10,7 @@ vagrant box add --force my-box file:///home/jcrochon/vagrant/$BOX/$BOX.box
 
 BOX=kali-purple
 export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
-vagrant cloud publish -C sha512 -c "$(sha512sum $BOX/$BOX.box | awk '{print $1}')" --release -a amd64 --direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX/$BOX.box
+vagrant cloud publish -C sha512 -c "$(sha512sum $BOX/$BOX.box | awk '{print $1}')" --release -a amd64 --no-direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX/$BOX.box
 
 ========================================================================================================================================================================================
 NOTES
