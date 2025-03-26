@@ -1,0 +1,16 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure("2") do |config|
+
+    config.vm.define "main" do |config|
+        config.vm.box = 'http://bit.ly/vagrant-lxc-wheezy64-2013-10-23'
+
+        config.vm.provider :lxc do |lxc|
+            lxc.customize 'cgroup.memory.limit_in_bytes', '512M'
+        end
+
+        config.vm.provision :shell do |shell|
+            shell.path = 'provision.sh'
+        end
+    end
+end

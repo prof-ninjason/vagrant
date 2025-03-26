@@ -1,0 +1,313 @@
+hcp auth login --client-id=....  --client-secret=.... 
+export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
+
+VBoxManage.exe list vms
+
+BOX=kali-purple
+vagrant package --base "Kali Purple" --output $BOX/$BOX.box
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/$BOX/$BOX.box
+
+BOX=kali-purple
+export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
+vagrant cloud publish -C sha512 -c "$(sha512sum $BOX/$BOX.box | awk '{print $1}')" --release -a amd64 --no-direct-upload "prof-ninjason/$BOX" 1.0.1 virtualbox $BOX/$BOX.box
+
+========================================================================================================================================================================================
+NOTES
+========================================================================================================================================================================================
+[.bashrc , .bash_aliases]
+
+alias ga='git add . ; git commit -m "updated" ; git push -u origin main'
+
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+PATH=/usr/bin:/sbin:/usr/sbin:$PATH dockerd-rootless.sh  --iptables=false
+export DOCKER_HOST=unix:///mnt/wslg/runtime-dir/docker.sock
+export PATH=/usr/bin:$PATH
+
+~/bin/update
+wsl.exe --update
+sudo apt upgrade wsl ruby-dev
+vagrant plugin update
+#vagrant box update
+
+========================================================================================================================================================================================
+[ I N S T A L L   S C R I P T S ]
+
+[DHCP INTERNAL NETWORK]
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
+
+[VAGRANT]
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt update && sudo apt install vagrant && sudo apt autoremove
+
+vagrant plugin install vagrant-virtualbox
+
+[test]
+cd /home/jcrochon/vagrant/ && vagrant up pfsense
+
+
+[DOCKER]
+sudo apt -y purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras && sudo apt -y update && sudo apt -y install ca-certificates curl gnupg
+
+curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
+
+sudo usermod -aG docker $USER
+
+
+
+[test]
+sudo -E docker run -d -p 8000:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=ChangeM3!" --name splunk splunk/splunk:latest
+
+http://localhost:8000
+
+========================================================================================================================================================================================
+
+pfSense swap em0 & em1 thru Option 1
+em1 => WAN
+em0 => LAN
+
+========================================================================================================================================================================================
+
+VirtualBox - adding dhcp server and configuring virtual machine
+
+To add new DHCP server for specified local network, issue following command in the host's command line:
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver add --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
+The created virtual server will be named intnet.
+
+In the virtual machine you have to configure network adapter to obtain IP address from the DHCP server. To do it just add following lines at the end of /etc/network/interface file:
+auto eth1
+iface eth1 inet dhcp
+
+To remove created above DHCP server (named intnet) execute following command:
+VBoxManage dhcpserver remove --netname intnet
+
+
+Change the scope:
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' dhcpserver modify --netname intnet --ip 192.168.10.1 --netmask 255.255.255.0 --lowerip 192.168.10.61 --upperip 192.168.10.69 --global --min-lease-time=900 --default-lease-time=900 --max-lease-time=900 --enable
+& 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' list dhcpservers
+
+========================================================================================================================================================================================
+ssh-keygen -t ed25519 -C "jrochon@waubonsee.edu"
+
+.ssh directory: 		700 (drwx------)
+public key (.pub file):	644 (-rw-r--r--)
+private key (id_rsa): 	600 (-rw-------)
+home directory: 		755 (drwxr-xr-x)
+
+https://app.vagrantup.com
+
+vagrant package --base pfSense --output ./pfSense.box ; sha512sum pfSense.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/pfSense/pfSense.box
+
+vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
+
+vagrant package --base Kali --output ./kali.box ; sha512sum kali.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/kali/kali.box
+
+vagrant package --base owasp --output ./owasp.box ; sha512sum owasp.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/owasp/owasp.box
+
+vagrant package --base 'CyberOps Security Onion' --output ./onion.box ; sha512sum onion.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/onion/onion.box
+
+vagrant package --base 'CyberOps Security Onion' --output ./greenbone.box ; sha512sum greenbone.box > SHA512SUM
+cd ~/vagrant/; ga
+vagrant box add --force my-box file:///home/jcrochon/vagrant/greenbone/greenbone.box
+
+vagrant box update
+
+========================================================================================================================================================================================
+
+# if using older "master", rename to "main"
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+
+git config --global user.name "prof-ninjason"
+git config --global user.email "jrochon@waubonsee.edu"
+git config --global core.autocrlf true
+git config --list
+
+git add .
+git commit -a -m "updated"
+git branch -M main
+git remote add origin git@github.com:prof-ninjason/vagrant.git
+git push -u origin main
+
+
+========================================================================================================================================================================================
+
+# Install Ruby Gems
+sudo gem install ffi -- --enable-system-libffi
+
+# Install virtualbox_WSL2 plugin
+sudo vagrant plugin install virtualbox_WSL2 vagrant-vbguest vagrant-box-updater  vagrant-remove-old-box-versions vagrant-clean vagrant-winrm-syncedfolders vagrant-sshfs vagrant-mutate vagrant-bindfs
+
+
+vagrant cloud provider upload ORGANIZATION/BOX-NAME PROVIDER-NAME VERSION BOX-FILE
+
+vagrant cloud provider upload prof-ninjason/greenbone virtualbox 1.0.0 greenbone.box
+
+
+cd opnsense/
+vagrant package --base 'opnSense' --output ./opnsense.box
+sha512sum opnsense.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force opnsense file:///home/jcrochon/vagrant/opnsense/opnsense.box
+vagrant cloud provider upload prof-ninjason/opnsense virtualbox 1.0.0 opnsense/opnsense.box
+
+
+# Launch a list of VMs in the background
+jcrochon@PC214-027885:~/vagrant$ for j in `cat`; do vagrant up $j & done
+kali owasp pfsense
+
+==============================================
+
+cd ~/vagrant/parrot/
+vagrant package --base 'parrot' --output ./parrot.box
+sha512sum parrot.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force parrot file:///home/jcrochon/vagrant/parrot/parrot.box
+vagrant cloud provider upload prof-ninjason/parrot virtualbox 1.0.0 parrot/parrot.box
+
+
+cd ~/vagrant/kali/
+vagrant package --base 'kali' --output ./kali.box
+sha512sum kali.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force kali file:///home/jcrochon/vagrant/kali/kali.box
+vagrant cloud provider upload prof-ninjason/kali virtualbox 1.0.0 kali/kali.box
+
+# Vagrant 2.4.0 and newer
+vagrant cloud publish -a amd64 -c 023fb3d0b7357782f7296d386ab8fe798ebc24a057e73f56dde96518bef9eef317ebecd4994dca16717bb0784ae92a8c13826a68a3fd0d857ea37e8cf3260745  -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine virtualbox 1.0.0 alpine/alpine.box
+
+==============================================
+
+Migrating to Hashicorp Cloud Platform (HCP)
+
+https://developer.hashicorp.com/vagrant/vagrant-cloud/hcp-vagrant/post-migration-guide
+https://developer.hashicorp.com/hcp/docs/cli/install
+https://developer.hashicorp.com/hcp/docs/cli
+
+sudo apt-get update && sudo apt-get install wget gpg coreutils
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt-get update && sudo apt-get install hcp
+
+hcp -autocomplete-install
+
+hcp profile init
+
+hcp auth login --client-id=CLIENT_ID --client-secret=CLIENT_SECRET
+
+hcp auth print-access-token
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;$(hcp auth print-access-token)"
+
+-------------------------------------------------------------
+
+MIGHT NOT NEED TO USE HCP TO MANAGE VAGRANT BOXES
+
+vagrant package --base 'Kali Purple' --output ./kali-purple.box
+sha512sum kali-purple.box | tee SHA512SUM
+cd ~/vagrant/
+ga
+vagrant box add --force kalipurple file:///home/jcrochon/vagrant/kali-purple/kali-purple.box
+vagrant cloud provider upload prof-ninjason/kalipurple virtualbox 1.0.0 kali-purple/kali-purple.box
+
+====================================================================================================================================
+
+vagrant package --base Kali-Purple --output kali-purple.box
+hcp vagrant box upload Kali-Purple kali-purple.box --version "1.0.0" --provider virtualbox --arch amd64
+
+[X] [X] [X] ONLY THIS WORKS FOR UPLOADING TO HCP [X] [X] [X]
+vagrant cloud publish -a amd64 -c 023fb3d0b7357782f7296d386ab8fe798ebc24a057e73f56dde96518bef9eef317ebecd4994dca16717bb0784ae92a8c13826a68a3fd0d857ea37e8cf3260745  -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/alpine virtualbox 1.0.0 alpine/alpine.box
+
+
+hcp auth login --client-id=CLIENT_ID --client-secret=CLIENT_SECRET
+
+hcp auth print-access-token
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;<HCP_TOKEN>"
+
+export VAGRANT_CLOUD_TOKEN="<VAGRANT_CLOUD_TOKEN>;$(hcp auth print-access-token)"
+
+export VAGRANT_CLOUD_TOKEN=";$(hcp auth print-access-token)"
+
+hcp auth login --client-id=cg1gsECaJ87rcLN6celcBgJAFC25T4FP --client-secret=e38YwrGQoqOKngBrzTuHMm5u1HCPKc1Tzq_m_ZEAs6PTj0yvDTlUpX1RL00OmGjF
+
+
+====================================================================================================================================
+NEW UPDATED INSTRUCTIONS
+
+vagrant cloud publish --box-version "1.0.0" --provider virtualbox --release prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+VAGRANT_LOG=info vagrant package --base "Kali Purple" --output vagrant/kali-purple/kali-purple.box
+
+vagrant cloud publish -C sha512 -c <HASH> prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+====================================================================================================================================
+
+vagrant cloud publish --box-version "1.0.0" --provider virtualbox --release prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+VAGRANT_LOG=info vagrant package --base "Kali Purple" --output vagrant/kali-purple/kali-purple.box
+
+vagrant cloud publish -C sha512 -c prof-ninjason/kali-purple 1.0.0 virtualbox vagrant/kali-purple/kali-purple.box
+
+
+
+
+Your key was successfully generated.
+
+Client ID
+
+
+D77IfcyNeMgqF2md3Fo2HVLPjxYcZD55
+
+
+Be sure to copy the client secret. You will not be able to retrieve it later.
+Client secret
+
+
+4hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV7
+
+
+
+vagrant cloud publish -c 8e2cf09d7b53c74f8b81df1c6f70bab6de477a443c761053725c6fd5effb4b738a169dec0755a578811dbaace78b0b70533ff5664b10f4f04aa3f0d16c86c565 -C sha512 --no-direct-upload --no-private -f -r -s "Custom interfaces for my own internal lab." --version-description "Two custom interfaces for my own internal lab." prof-ninjason/kali-purple virtualbox 1.0.0 kali-purple/kali-purple.box
+
+
+
+
+
+
+unset VAGRANT_CLOUD_TOKEN
+export HCP_CLIENT_ID="D77IfcyNeMgqF2md3Fo2HVLPjxYcZD55"
+export HCP_CLIENT_SECRET="4hWkswN5ibXEVRHX6LegdBv-aDcvbVTlU3neDEWBU3i5HVrW8EUvzVz8GqNlcWV7"
+
+
+
+
+
+
+
+
+
+
