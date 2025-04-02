@@ -6,7 +6,7 @@ VBoxManage.exe list vms
 BOX=kali-purple
 vagrant package --base "Kali Purple" --output $BOX/$BOX.box
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/$BOX/$BOX.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/$BOX/$BOX.box
 
 BOX=kali-purple
 export VAGRANT_CLOUD_TOKEN="$(hcp auth print-access-token)"
@@ -102,27 +102,27 @@ https://app.vagrantup.com
 
 vagrant package --base pfSense --output ./pfSense.box ; sha512sum pfSense.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/pfSense/pfSense.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/pfSense/pfSense.box
 
 vagrant package --base Ubuntu --output ./ubuntu.box ; sha512sum ubuntu.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/ubuntu/ubuntu.box
 
 vagrant package --base Kali --output ./kali.box ; sha512sum kali.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/kali/kali.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/kali/kali.box
 
 vagrant package --base owasp --output ./owasp.box ; sha512sum owasp.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/owasp/owasp.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/owasp/owasp.box
 
 vagrant package --base 'CyberOps Security Onion' --output ./onion.box ; sha512sum onion.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/onion/onion.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/onion/onion.box
 
 vagrant package --base 'CyberOps Security Onion' --output ./greenbone.box ; sha512sum greenbone.box > SHA512SUM
 cd ~/vagrant/; ga
-vagrant box add --force my-box file:///home/jcrochon/vagrant/greenbone/greenbone.box
+vagrant box add --force $BOX file:///home/jcrochon/vagrant/greenbone/greenbone.box
 
 vagrant box update
 
