@@ -162,7 +162,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "alpine" do |alpine|
-    alpine.vm.box = "generic/alpine319"
+    alpine.vm.box = "prof-ninjason/alpine"
     alpine.vm.hostname = "alpine"
 
     alpine.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
